@@ -42,9 +42,9 @@ read -r -p "[1/2]: " branch
 
 if [ $branch == 1 ] 
 then  
-    $branch = "master"
+    $branch = master
 else
-    $branch = "develop"
+    $branch = develop
 fi 
 
 echo
