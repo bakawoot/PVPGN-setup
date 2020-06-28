@@ -39,7 +39,7 @@ apt-get install libmysql++-dev
 
 echo
 echo "-- Select a Branch"
-read -r -p "'master' or 'develop'" branch
+read -r -p "'master' or 'develop': " branch
 
 echo
 echo "-- Do you want LUA support?"
@@ -85,7 +85,7 @@ echo
 echo "-- Do you want D2GS?"
 read -r -p "'yes' or 'no': " d2gsSelector
 
-if  [ "$d2gsSelector" == "yes" ]; then
+if  [ "$d2gsSelector" == 'yes' ]; then
     echo
     echo "-- Do you want D2GS?"
     echo "Which D2GS version?"
