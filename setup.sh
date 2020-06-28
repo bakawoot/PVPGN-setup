@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo
 echo "== https://github.com/bakawoot/PVPGN-setup =="
 echo
@@ -38,13 +40,13 @@ apt-get install libmysql++-dev
 echo
 echo "-- Select a Branch"
 echo "Master[1] or Develop[2]"
-read -r -p "[1/2]: " branch
+read -r -p "[1/2]: " branchSelector
 
-if [ $branch == 1 ] 
+if [ $branchSelector == 1 ] 
 then  
-    $branch = master
+    $branch = "master"
 else
-    $branch = develop
+    $branch = "develop"
 fi 
 
 echo
