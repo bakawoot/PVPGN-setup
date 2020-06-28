@@ -112,37 +112,44 @@ if  [ "$d2gsSelector" = "yes" ]; then
     case "$d2gsVersionSelector" in
         #case 1
         "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
-        unrar e D2GS-109d.zip d2gs/
+        unrar e -o+ D2GS-109d.zip d2gs/
         ;;
 
         #case 2
         "2") wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
-        unrar e D2GS-110-bin-beta6.rar d2gs/
+        unrar e -o+ D2GS-110-bin-beta6.rar d2gs/
         ;;
         
         #case 3
         "3") wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
-        unrar e D2GS-111b-build46.rar d2gs/
+        unrar e -o+ D2GS-111b-build46.rar d2gs/
         ;;
         
         #case 4
         "4") wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
-        unrar e D2GS-112a-build01.rar d2gs/
+        unrar e -o+ D2GS-112a-build01.rar d2gs/
         ;;
         
         #case 5
         "5") wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
-        unrar e D2GS-113-build02.rar d2gs/
+        unrar e -o+ D2GS-113-build02.rar d2gs/
         ;;
         
         #case 6
         "6") wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
-        unrar e D2GS-113c-build03.rar d2gs/
+        unrar e -o+ D2GS-113c-build03.rar d2gs/
         ;;
         
         #case 7
         "7") wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
-        unrar e D2GS-113d-build02_mxcen.rar d2gs/
+        unrar e -o+ D2GS-113d-build02_mxcen.rar d2gs/
         ;;
     esac
+    
+    mkdir wine
+    cd wine
+    wget http://dl.winehq.org/wine/source/2.0/wine-2.0.1.tar.xz
+    wget https://gist.githubusercontent.com/HarpyWar/cd3676fa4916ea163c50/raw/50fbbff9a310d98496f458124fac14bda2e16cf0/sock.c
+    tar xf wine-2.0.1.tar.xz
+    mv sock.c wine-2.0.1/server
 fi
