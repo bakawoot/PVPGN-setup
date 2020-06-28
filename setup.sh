@@ -98,7 +98,7 @@ if  [ "$d2gsSelector" == 'yes' ]; then
     echo "[7]1.13d (build02)"
 
     read -r -p "'[1/2/3/4/5/6/7]': " d2gsSelector
-    case "$d2gslSelector" in
+    case "$d2gsSelector" in
         #case 1
         "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip ;;
 
