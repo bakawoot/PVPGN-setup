@@ -43,7 +43,7 @@ read -r -p "'master' or 'develop'" branch
 
 echo
 echo "-- Do you want LUA support?"
-read -r -p "'yes' or 'no'" luaSelector
+read -r -p "'yes' or 'no': " luaSelector
 
 case "$luaSelector" in
     #case 1
@@ -55,7 +55,7 @@ esac
 
 echo
 echo "-- Do you want MYSQL support?"
-read -r -p "'yes' or 'no'" mysqlSelector
+read -r -p "'yes' or 'no': " mysqlSelector
 
 case "$mysqlSelector" in
     #case 1
@@ -82,4 +82,42 @@ echo "-- Make & Install --"
 make && make install
 
 echo
-echo "-- DONE --"
+echo "-- Do you want D2GS?"
+read -r -p "'yes' or 'no': " d2gsSelector
+
+if  [ "$d2gsSelector" == "yes" ]; then
+    echo
+    echo "-- Do you want D2GS?"
+    echo "Which D2GS version?"
+    echo "[1]1.09d"
+    echo "[2]1.10 (beta6)"
+    echo "[3]1.11b (build46)"
+    echo "[4]1.12a (build01)"
+    echo "[5]1.13 (build02)"
+    echo "[6]1.13c (build03)"
+    echo "[7]1.13d (build02)"
+
+    read -r -p "'[1/2/3/4/5/6/7]': " d2gsSelector
+    case "$d2gslSelector" in
+        #case 1
+        "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip ;;
+
+        #case 2
+        "2") wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar ;;
+        
+        #case 3
+        "3") wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar ;;
+        
+        #case 4
+        "4") wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar ;;
+        
+        #case 5
+        "5") wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar ;;
+        
+        #case 6
+        "6") wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar ;;
+        
+        #case 7
+        "7") wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar ;;
+    esac
+fi
