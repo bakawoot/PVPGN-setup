@@ -35,7 +35,17 @@ echo
 echo "- LibMYSQL++-DEV"
 apt-get install libmysql++-dev
 
-read -r -p "'master' or 'develop' branch: " branch
+echo
+echo "-- Select a Branch"
+echo "Master[1] or Develop[2]"
+read -r -p "[1/2]: " branch
+
+if [ $branch == 1 ] 
+then  
+    $branch = "master"
+else
+    $branch = "develop"
+fi 
 
 echo
 echo "-- Cloning the latest PVPGN files --"
@@ -52,3 +62,6 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL=true -D WITH_LUA=tr
 echo
 echo "-- Make & Install --"
 make && make install
+
+echo
+echo "-- DONE --"
