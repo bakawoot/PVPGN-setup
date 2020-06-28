@@ -85,7 +85,7 @@ echo
 echo "-- Do you want D2GS?"
 read -r -p "'yes' or 'no': " d2gsSelector
 
-if  [ "$d2gsSelector" == 'yes' ]; then
+if  [ "$d2gsSelector" == yes ]; then
     echo
     echo "-- Do you want D2GS?"
     echo "Which D2GS version?"
@@ -97,8 +97,8 @@ if  [ "$d2gsSelector" == 'yes' ]; then
     echo "[6]1.13c (build03)"
     echo "[7]1.13d (build02)"
 
-    read -r -p "'[1/2/3/4/5/6/7]': " d2gsSelector
-    case "$d2gsSelector" in
+    read -r -p "'[1/2/3/4/5/6/7]': " d2gsVersionSelector
+    case "$d2gsVersionSelector" in
         #case 1
         "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip ;;
 
