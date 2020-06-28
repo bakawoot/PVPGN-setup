@@ -39,15 +39,31 @@ apt-get install libmysql++-dev
 
 echo
 echo "-- Select a Branch"
-echo "Master[1] or Develop[2]"
-read -r -p "[1/2]: " branchSelector
+read -r -p "'master' or 'develop'" branch
 
-if [ $branchSelector == 1 ] 
-then  
-    $branch = "master"
-else
-    $branch = "develop"
-fi 
+echo
+echo "-- Do you want LUA support?"
+read -r -p "'yes' or 'no'" luaSelector
+
+case "$luaSelector" in
+    #case 1
+    "yes") lua='true' ;;
+
+    #case 2
+    "no") lua='false' ;;
+esac
+
+echo
+echo "-- Do you want MYSQL support?"
+read -r -p "'yes' or 'no'" mysqlSelector
+
+case "$mysqlSelector" in
+    #case 1
+    "yes") mysql='true' ;;
+
+    #case 2
+    "no") mysql='false' ;;
+esac
 
 echo
 echo "-- Cloning the latest PVPGN files --"
@@ -59,7 +75,7 @@ mkdir pvpgn/pvpgn-source/build
 echo
 echo "-- CMake --"
 cd pvpgn/pvpgn-source/build
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL=true -D WITH_LUA=true ../
+cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL="${mysql}" -D WITH_LUA="${lua}" ../
 
 echo
 echo "-- Make & Install --"
