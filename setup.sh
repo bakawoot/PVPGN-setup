@@ -152,4 +152,13 @@ if  [ "$d2gsSelector" = "yes" ]; then
     wget https://gist.githubusercontent.com/HarpyWar/cd3676fa4916ea163c50/raw/50fbbff9a310d98496f458124fac14bda2e16cf0/sock.c
     tar xf wine-2.0.1.tar.xz
     mv sock.c wine-2.0.1/server
+    mv wine-2.0.1 wine-source
+    mkdir wine-dirs
+    mv wine-source wine-dir
+    cd wine-dirs
+    mkdir wine-build
+    cd wine-build
+    ../wine-source/configure --without-x
+    make -j 10
+    sudo make install -j 10
 fi
