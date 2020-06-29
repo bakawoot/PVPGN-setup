@@ -18,24 +18,12 @@ echo "- LibC++-Dev"
 apt-get install libc++-dev
 
 echo
-echo "- Git"
-apt-get install git
-
-echo
 echo "- Cmake"
 apt-get install cmake
 
 echo
 echo "- ZLib1G-DEV"
 apt-get install zlib1g-dev
-
-echo
-echo "- LibLua5.1-0-DEV"
-apt-get install liblua5.1-0-dev 
-
-echo
-echo "- LibMYSQL++-DEV"
-apt-get install libmysql++-dev
 
 echo
 echo "-- Select a Branch"
@@ -47,7 +35,11 @@ read -r -p "'yes' or 'no': " luaSelector
 
 case "$luaSelector" in
     #case 1
-    "yes") lua='true' ;;
+    "yes") lua='true'
+    echo
+    echo "- LibLua5.1-0-DEV"
+    apt-get install liblua5.1-0-dev 
+    ;;
 
     #case 2
     "no") lua='false' ;;
@@ -59,7 +51,11 @@ read -r -p "'yes' or 'no': " mysqlSelector
 
 case "$mysqlSelector" in
     #case 1
-    "yes") mysql='true' ;;
+    "yes") mysql='true'
+    echo
+    echo "- LibMYSQL++-DEV"
+    apt-get install libmysql++-dev
+    ;;
 
     #case 2
     "no") mysql='false' ;;
