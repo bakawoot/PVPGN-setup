@@ -154,7 +154,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     mv sock.c wine-2.0.1/server
     mv wine-2.0.1 wine-source
     mkdir wine-dirs
-    mv wine-source wine-dir
+    mv wine-source wine-dirs
     cd wine-dirs
     mkdir wine-build
     cd wine-build
