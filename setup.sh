@@ -160,5 +160,5 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd wine-build
     ../wine-source/configure --without-x --without-freetype
     make -j 10
-    sudo make install -j 10
+    make install -j 10
 fi
