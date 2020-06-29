@@ -7,23 +7,23 @@ echo
 echo "-- Installing packages --"
 
 echo "- Build-essential"
-apt-get install build-essential 
+apt-get install -y build-essential 
 
 echo
 echo "- Clang"
-apt-get install clang
+apt-get install-y clang
 
 echo
 echo "- LibC++-Dev"
-apt-get install libc++-dev
+apt-get install -y libc++-dev
 
 echo
 echo "- Cmake"
-apt-get install cmake
+apt-get install -y cmake
 
 echo
 echo "- ZLib1G-DEV"
-apt-get install zlib1g-dev
+apt-get install -y zlib1g-dev
 
 echo
 echo "-- Select a Branch"
@@ -38,7 +38,7 @@ case "$luaSelector" in
     "yes") lua='true'
     echo
     echo "- LibLua5.1-0-DEV"
-    apt-get install liblua5.1-0-dev 
+    apt-get install -y liblua5.1-0-dev 
     ;;
 
     #case 2
@@ -54,7 +54,7 @@ case "$mysqlSelector" in
     "yes") mysql='true'
     echo
     echo "- LibMYSQL++-DEV"
-    apt-get install libmysql++-dev
+    apt-get install -y libmysql++-dev
     ;;
 
     #case 2
@@ -84,11 +84,11 @@ read -r -p "'yes' or 'no': " d2gsSelector
 if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Installing additional packages --"
-    apt-get install unrar
-    apt-get install lib32zl
-    apt-get install gcc-multilib
-    apt-get install xserver-xorg-dev:i386
-    apt-get install libfreetype6-dev:i386
+    apt-get install -y unrar
+    apt-get install -y lib32zl
+    apt-get install -y gcc-multilib
+    apt-get install -y xserver-xorg-dev:i386
+    apt-get install -y libfreetype6-dev:i386
     dpkg --add-architecture i386
 
     cd ..
