@@ -83,8 +83,10 @@ read -r -p "'yes' or 'no': " d2gsSelector
 
 if  [ "$d2gsSelector" = "yes" ]; then
     echo
-    echo "-- Installing additional packages --"
+    echo "-- Installing additional packages --" 
     apt-get install -y unrar
+    apt-get install -y flex
+    apt-get install -y bison
     apt-get install -y lib32zl
     apt-get install -y gcc-multilib
     apt-get install -y xserver-xorg-dev:i386
@@ -142,6 +144,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
     esac
     
+    echo
+    echo "-- Setting up wine"
     mkdir wine
     cd wine
     wget http://dl.winehq.org/wine/source/2.0/wine-2.0.1.tar.xz
@@ -154,7 +158,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd wine-dirs
     mkdir wine-build
     cd wine-build
-    ../wine-source/configure --without-x
+    ../wine-source/configure --without-x --without-freetype
     make -j 10
     sudo make install -j 10
 fi
