@@ -30,14 +30,6 @@ echo "- ZLib1G-DEV"
 apt-get install zlib1g-dev
 
 echo
-echo "- LibLua5.1-0-DEV"
-apt-get install liblua5.1-0-dev 
-
-echo
-echo "- LibMYSQL++-DEV"
-apt-get install libmysql++-dev
-
-echo
 echo "-- Select a Branch"
 read -r -p "'master' or 'develop': " branch
 
@@ -47,7 +39,9 @@ read -r -p "'yes' or 'no': " luaSelector
 
 case "$luaSelector" in
     #case 1
-    "yes") lua='true' ;;
+    "yes") lua='true' 
+    apt-get install liblua5.1-0-dev 
+    ;;
 
     #case 2
     "no") lua='false' ;;
@@ -59,7 +53,9 @@ read -r -p "'yes' or 'no': " mysqlSelector
 
 case "$mysqlSelector" in
     #case 1
-    "yes") mysql='true' ;;
+    "yes") mysql='true' 
+    apt-get install libmysql++-dev
+    ;;
 
     #case 2
     "no") mysql='false' ;;
@@ -146,19 +142,11 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
     esac
     
+    dpkg --add-architecture i386 
     mkdir wine
     cd wine
-    wget http://dl.winehq.org/wine/source/2.0/wine-2.0.1.tar.xz
-    wget https://gist.githubusercontent.com/HarpyWar/cd3676fa4916ea163c50/raw/50fbbff9a310d98496f458124fac14bda2e16cf0/sock.c
-    tar xf wine-2.0.1.tar.xz
-    mv sock.c wine-2.0.1/server
-    mv wine-2.0.1 wine-source
-    mkdir wine-dirs
-    mv wine-source wine-dir
-    cd wine-dirs
-    mkdir wine-build
-    cd wine-build
-    ../wine-source/configure --without-x
-    make -j 10
-    sudo make install -j 10
+    wget -O - https://dl.winehq.org/wine-builds/winehq.key
+    apt-key add -
+    add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' 
+    apt install --install-recommends winehq-stable
 fi
