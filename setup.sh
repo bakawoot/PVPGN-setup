@@ -146,10 +146,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
     
     echo
     echo "-- Setting up wine"
-    mkdir wine
-    cd wine
     dpkg --add-architecture i386
     wget -O - https://dl.winehq.org/wine-builds/winehq.key
     add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
-    apt install --install-recommends winehq-stable
+    apt install --install-recommends wine-stable
 fi
