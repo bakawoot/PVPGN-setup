@@ -7,27 +7,23 @@ echo
 echo "-- Installing packages --"
 
 echo "- Build-essential"
-apt-get install build-essential 
+apt-get install -y build-essential 
 
 echo
 echo "- Clang"
-apt-get install clang
+apt-get install-y clang
 
 echo
 echo "- LibC++-Dev"
-apt-get install libc++-dev
-
-echo
-echo "- Git"
-apt-get install git
+apt-get install -y libc++-dev
 
 echo
 echo "- Cmake"
-apt-get install cmake
+apt-get install -y cmake
 
 echo
 echo "- ZLib1G-DEV"
-apt-get install zlib1g-dev
+apt-get install -y zlib1g-dev
 
 echo
 echo "-- Select a Branch"
@@ -39,8 +35,10 @@ read -r -p "'yes' or 'no': " luaSelector
 
 case "$luaSelector" in
     #case 1
-    "yes") lua='true' 
-    apt-get install liblua5.1-0-dev 
+    "yes") lua='true'
+    echo
+    echo "- LibLua5.1-0-DEV"
+    apt-get install -y liblua5.1-0-dev 
     ;;
 
     #case 2
@@ -53,8 +51,10 @@ read -r -p "'yes' or 'no': " mysqlSelector
 
 case "$mysqlSelector" in
     #case 1
-    "yes") mysql='true' 
-    apt-get install libmysql++-dev
+    "yes") mysql='true'
+    echo
+    echo "- LibMYSQL++-DEV"
+    apt-get install -y libmysql++-dev
     ;;
 
     #case 2
@@ -83,12 +83,14 @@ read -r -p "'yes' or 'no': " d2gsSelector
 
 if  [ "$d2gsSelector" = "yes" ]; then
     echo
-    echo "-- Installing additional packages --"
-    apt-get install unrar
-    apt-get install lib32zl
-    apt-get install gcc-multilib
-    apt-get install xserver-xorg-dev:i386
-    apt-get install libfreetype6-dev:i386
+    echo "-- Installing additional packages --" 
+    apt-get install -y unrar
+    apt-get install -y flex
+    apt-get install -y bison
+    apt-get install -y lib32zl
+    apt-get install -y gcc-multilib
+    apt-get install -y xserver-xorg-dev:i386
+    apt-get install -y libfreetype6-dev:i386
     dpkg --add-architecture i386
 
     cd ..
@@ -142,11 +144,21 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
     esac
     
-    dpkg --add-architecture i386 
+    echo
+    echo "-- Setting up wine"
     mkdir wine
     cd wine
-    wget -O - https://dl.winehq.org/wine-builds/winehq.key
-    apt-key add -
-    add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' 
-    apt install --install-recommends winehq-stable
+    wget http://dl.winehq.org/wine/source/2.0/wine-2.0.1.tar.xz
+    wget https://gist.githubusercontent.com/HarpyWar/cd3676fa4916ea163c50/raw/50fbbff9a310d98496f458124fac14bda2e16cf0/sock.c
+    tar xf wine-2.0.1.tar.xz
+    mv sock.c wine-2.0.1/server
+    mv wine-2.0.1 wine-source
+    mkdir wine-dirs
+    mv wine-source wine-dirs
+    cd wine-dirs
+    mkdir wine-build
+    cd wine-build
+    ../wine-source/configure --without-x --without-freetype
+    make -j 10
+    make install -j 10
 fi
