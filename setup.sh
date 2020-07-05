@@ -161,7 +161,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Setting up wine"
     dpkg --add-architecture i386
-    wget -O - https://dl.winehq.org/wine-builds/winehq.key
+    wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
     add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
     apt-get install --install-recommends wine-stable
 
@@ -174,9 +174,9 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"AutoUpdateUrl\"=\"http://your.website.url/for.update\"
 \"AutoUpdateVer\"=dword:00000000
 \"AutoUpdateTimeout\"=dword:00007530
-\"D2CSIP\"=\"192.168.1.1\"
+\"D2CSIP\"=\"192.168.0.15\"
 \"D2CSPort\"=dword:000017e1
-\"D2DBSIP\"=\"192.168.1.1\"
+\"D2DBSIP\"=\"192.168.0.15\"
 \"D2DBSPort\"=dword:000017e2
 \"MaxGames\"=dword:00000400
 \"MaxGameLife\"=dword:00003840
