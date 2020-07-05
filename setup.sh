@@ -111,37 +111,51 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 1
         "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
         unrar e -o+ D2GS-109d.zip d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.09d/
         ;;
 
         #case 2
         "2") wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
         unrar e -o+ D2GS-110-bin-beta6.rar d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.10/
         ;;
         
         #case 3
         "3") wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
         unrar e -o+ D2GS-111b-build46.rar d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.11b/
         ;;
         
         #case 4
         "4") wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
         unrar e -o+ D2GS-112a-build01.rar d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.12a/
         ;;
         
         #case 5
         "5") wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
         unrar e -o+ D2GS-113-build02.rar d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
         ;;
         
         #case 6
         "6") wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
         unrar e -o+ D2GS-113c-build03.rar d2gs/
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
         ;;
         
         #case 7
         "7") wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
         unrar e -o+ D2GS-113d-build02_mxcen.rar d2gs/
-        ;;
+        cd d2gs
+        wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
+        ;; 
     esac
     
     echo
@@ -149,5 +163,5 @@ if  [ "$d2gsSelector" = "yes" ]; then
     dpkg --add-architecture i386
     wget -O - https://dl.winehq.org/wine-builds/winehq.key
     add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
-    apt install --install-recommends wine-stable
+    apt-get install --install-recommends wine-stable
 fi
