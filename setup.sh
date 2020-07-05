@@ -166,39 +166,39 @@ if  [ "$d2gsSelector" = "yes" ]; then
     apt-get install --install-recommends wine-stable
 
     #Create our Reg file
-    echo "REGEDIT 4" > d2gs_install.Reg
-    echo "" > d2gs_install.Reg
-    echo "[HKEY_LOCAL_MACHINE\SOFTWARE\D2Server\D2GS]" > d2gs_install.Reg
-    echo "@="Diablo II Close Game Server"" > d2gs_install.Reg
-    echo ""AutoUpdate"=dword:00000000" > d2gs_install.Reg
-    echo ""AutoUpdateUrl"="http://your.website.url/for.update"" > d2gs_install.Reg
-    echo ""AutoUpdateVer"=dword:00000000" > d2gs_install.Reg
-    echo ""AutoUpdateTimeout"=dword:00007530" > d2gs_install.Reg
-    echo ""D2CSIP"="192.168.1.1"" > d2gs_install.Reg
-    echo ""D2CSPort"=dword:000017e1" > d2gs_install.Reg
-    echo ""D2DBSIP"="192.168.1.1"" > d2gs_install.Reg
-    echo ""D2DBSPort"=dword:000017e2" > d2gs_install.Reg
-    echo ""MaxGames"=dword:00000400" > d2gs_install.Reg
-    echo ""MaxGameLife"=dword:00003840" > d2gs_install.Reg
-    echo ""AdminPassword"="9e75a42100e1b9e0b5d3873045084fae699adcb0"" > d2gs_install.Reg
-    echo ""AdminPort"=dword:000022b8" > d2gs_install.Reg
-    echo ""AdminTimeout"=dword:00000e10" > d2gs_install.Reg
-    echo ""D2CSSecrect"=""" > d2gs_install.Reg
-    echo ""EnableNTMode"=dword:00000001" > d2gs_install.Reg
-    echo ""EnablePreCacheMode"=dword:00000001" > d2gs_install.Reg
-    echo ""IdleSleep"=dword:00000001" > d2gs_install.Reg
-    echo ""BusySleep"=dword:00000001" > d2gs_install.Reg
-    echo ""CharPendingTimeout"=dword:00000258" > d2gs_install.Reg
-    echo ""DebugNetPacket"=dword:00000000" > d2gs_install.Reg
-    echo ""DebugEventCallback"=dword:00000000" > d2gs_install.Reg
-    echo ""EnableGSLog"=dword:00000001" > d2gs_install.Reg
-    echo ""EnableGELog"=dword:00000001" > d2gs_install.Reg
-    echo ""EnableGEMsg"=dword:00000000" > d2gs_install.Reg
-    echo ""EnableGEPatch"=dword:00000001" > d2gs_install.Reg
-    echo ""IntervalReconnectD2CS"=dword:00000032" > d2gs_install.Reg
-    echo ""MultiCPUMask"=dword:00000001" > d2gs_install.Reg
-    echo ""MaxPreferUsers"=dword:000000b4" > d2gs_install.Reg
-    echo ""MaxPacketPerSecond"=dword:000004b0" > d2gs_install.Reg
-    echo ""ServerConfFile"="D2Server.ini"" > d2gs_install.Reg
-    echo ""MOTD"="Hello world!"" > d2gs_install.Reg
+    echo "REGEDIT 4
+    
+    [HKEY_LOCAL_MACHINE\SOFTWARE\D2Server\D2GS]
+    echo @="Diablo II Close Game Server"
+    echo "AutoUpdate"=dword:00000000
+    echo "AutoUpdateUrl"="http://your.website.url/for.update"
+    echo "AutoUpdateVer"=dword:00000000
+    echo "AutoUpdateTimeout"=dword:00007530
+    echo "D2CSIP"="192.168.1.1"
+    echo "D2CSPort"=dword:000017e1
+    echo "D2DBSIP"="192.168.1.1"
+    echo "D2DBSPort"=dword:000017e2
+    echo "MaxGames"=dword:00000400
+    echo "MaxGameLife"=dword:00003840
+    echo "AdminPassword"="9e75a42100e1b9e0b5d3873045084fae699adcb0"
+    echo "AdminPort"=dword:000022b8
+    echo "AdminTimeout"=dword:00000e10
+    echo "D2CSSecrect"=""
+    echo "EnableNTMode"=dword:00000001
+    echo "EnablePreCacheMode"=dword:00000001
+    echo "IdleSleep"=dword:00000001
+    echo "BusySleep"=dword:00000001
+    echo "CharPendingTimeout"=dword:00000258
+    echo "DebugNetPacket"=dword:00000000
+    echo "DebugEventCallback"=dword:00000000
+    echo "EnableGSLog"=dword:00000001
+    echo "EnableGELog"=dword:00000001
+    echo "EnableGEMsg"=dword:00000000
+    echo "EnableGEPatch"=dword:00000001
+    echo "IntervalReconnectD2CS"=dword:00000032
+    echo "MultiCPUMask"=dword:00000001
+    echo "MaxPreferUsers"=dword:000000b4
+    echo "MaxPacketPerSecond"=dword:000004b0
+    echo "ServerConfFile"="D2Server.ini"
+    echo "MOTD"="Hello world!"" >> d2gs_install.reg
 fi
