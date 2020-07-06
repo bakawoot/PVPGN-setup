@@ -105,12 +105,13 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo "[5]1.13 (build02)"
     echo "[6]1.13c (build03)"
     echo "[7]1.13d (build02)"
-
     read -r -p "'[1/2/3/4/5/6/7]': " d2gsVersionSelector
+
     case "$d2gsVersionSelector" in
         #case 1
         "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
         unrar e -o+ D2GS-109d.zip d2gs/
+        rm D2GS-109d.zip
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.09d/
         ;;
@@ -118,6 +119,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 2
         "2") wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
         unrar e -o+ D2GS-110-bin-beta6.rar d2gs/
+        rm D2GS-110-bin-beta6.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.10/
         ;;
@@ -125,6 +127,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 3
         "3") wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
         unrar e -o+ D2GS-111b-build46.rar d2gs/
+        rm D2GS-111b-build46.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.11b/
         ;;
@@ -132,6 +135,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 4
         "4") wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
         unrar e -o+ D2GS-112a-build01.rar d2gs/
+        rm D2GS-112a-build01.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.12a/
         ;;
@@ -139,6 +143,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 5
         "5") wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
         unrar e -o+ D2GS-113-build02.rar d2gs/
+        rm D2GS-113-build02.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
         ;;
@@ -146,6 +151,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 6
         "6") wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
         unrar e -o+ D2GS-113c-build03.rar d2gs/
+        rm D2GS-113c-build03.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
         ;;
@@ -153,6 +159,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 7
         "7") wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
         unrar e -o+ D2GS-113d-build02_mxcen.rar d2gs/
+        rm D2GS-113d-build02.rar
         cd d2gs
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
         ;; 
@@ -173,14 +180,18 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd wine
     wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
     tar xf wine-5.2.tar.xz
-    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c wine-5.2/server/
-    cd wine-5.2
+    cd wine-5.2/server
+    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
+    cd ..
     ./configure --without-x --without-freetype
     make -j4
     checkinstall -D make install
     pt-get install -y checkinstall
     heckinstall -D make install
     apt-get install wine_5.2-1_i386.deb
+    cd ..
+    cd ..
+    cd d2gs
 
     #Create our Reg file
     echo "REGEDIT 4
