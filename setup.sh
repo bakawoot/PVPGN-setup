@@ -180,9 +180,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd ..
     ./configure --without-x --without-freetype
     make -j4
+    apt-get install -y checkinstall
     checkinstall -D make install
-    pt-get install -y checkinstall
-    heckinstall -D make install
     apt-get install wine_5.2-1_i386.deb
     cd ..
     cd ..
