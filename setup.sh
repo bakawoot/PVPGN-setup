@@ -161,9 +161,26 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Setting up wine"
     dpkg --add-architecture i386
-    wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
-    add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
-    apt-get install --install-recommends wine-stable
+    apt-get install -y flex
+    apt-get install -y bison
+    apt-get install -y checkinstall
+    apt-get install -y gcc-multilib
+    apt-get install -y g++-multilib
+    apt-get install -y xserver-xorg-dev:i386
+    apt-get install -y libfreetype6-dev:i386
+    cd ..
+    mkdir wine
+    cd wine
+    wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
+    tar xf wine-5.2.tar.xz
+    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c wine-5.2/server/
+    cd wine-5.2
+    ./configure --without-x --without-freetype
+    make -j4
+    checkinstall -D make install
+    pt-get install -y checkinstall
+    heckinstall -D make install
+    apt-get install wine_5.2-1_i386.deb
 
     #Create our Reg file
     echo "REGEDIT 4
@@ -184,7 +201,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"AdminPort\"=dword:000022b8
 \"AdminTimeout\"=dword:00000e10
 \"D2CSSecrect\"=\"\"
-\"EnableNTMode\"=dword:00000001
+\"EnableNTMode\"=dword:00000000
 \"EnablePreCacheMode\"=dword:00000001
 \"IdleSleep\"=dword:00000001
 \"BusySleep\"=dword:00000001
