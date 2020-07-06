@@ -82,16 +82,6 @@ echo "-- Do you want D2GS?"
 read -r -p "'yes' or 'no': " d2gsSelector
 
 if  [ "$d2gsSelector" = "yes" ]; then
-    echo
-    echo "-- Installing additional packages --" 
-    apt-get install -y unrar
-    apt-get install -y flex
-    apt-get install -y bison
-    apt-get install -y lib32zl
-    apt-get install -y gcc-multilib
-    apt-get install -y xserver-xorg-dev:i386
-    apt-get install -y libfreetype6-dev:i386
-    dpkg --add-architecture i386
 
     cd ..
     cd ..
@@ -106,6 +96,10 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo "[6]1.13c (build03)"
     echo "[7]1.13d (build02)"
     read -r -p "'[1/2/3/4/5/6/7]': " d2gsVersionSelector
+
+    echo
+    echo "-- Unrar --"
+    apt-get install -y unrar
 
     case "$d2gsVersionSelector" in
         #case 1
@@ -168,6 +162,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Setting up wine"
     dpkg --add-architecture i386
+    apt-get install -y lib32zl
     apt-get install -y flex
     apt-get install -y bison
     apt-get install -y checkinstall
