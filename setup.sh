@@ -5,24 +5,8 @@ echo "== https://github.com/bakawoot/PVPGN-setup =="
 echo
 
 echo "-- Installing packages --"
-
-echo "- Build-essential"
-apt-get install -y build-essential
-
-echo
-echo "- Clang"
-apt-get install -y clang
-
-echo
-echo "- LibC++-Dev"
-apt-get install -y libc++-dev
-
-echo
-echo "- Cmake"
 apt-get install -y cmake
-
-echo
-echo "- ZLib1G-DEV"
+apt-get install -y build-essential
 apt-get install -y zlib1g-dev
 
 echo
@@ -63,13 +47,10 @@ esac
 
 echo
 echo "-- Cloning the latest PVPGN files --"
-git clone --depth=50 --branch="${branch}" https://github.com/pvpgn/pvpgn-server.git pvpgn/pvpgn-server
+git clone --depth=50 --branch="${branch}" https://github.com/pvpgn/pvpgn-server.git /pvpgn/pvpgn-source
 
-mv pvpgn/pvpgn-server pvpgn/pvpgn-source
 mkdir /pvpgn/pvpgn-source/build
 
-echo
-echo "-- CMake --"
 cd /pvpgn/pvpgn-source/build
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL="${mysql}" -D WITH_LUA="${lua}" ../
 
@@ -83,7 +64,6 @@ read -r -p "'yes' or 'no': " d2gsSelector
 
 if  [ "$d2gsSelector" = "yes" ]; then
 
-    cd /pvpgn/
     echo
     echo "-- Do you want D2GS?"
     echo "Which D2GS version?"
@@ -102,7 +82,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
 
     case "$d2gsVersionSelector" in
         #case 1
-        "1") wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
+        "1") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
         unrar e -o+ D2GS-109d.zip d2gs/
         rm D2GS-109d.zip
         cd /pvpgn/d2gs/
@@ -110,7 +91,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
 
         #case 2
-        "2") wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
+        "2") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
         unrar e -o+ D2GS-110-bin-beta6.rar d2gs/
         rm D2GS-110-bin-beta6.rar
         cd /pvpgn/d2gs/
@@ -118,7 +100,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
         
         #case 3
-        "3") wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
+        "3") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
         unrar e -o+ D2GS-111b-build46.rar d2gs/
         rm D2GS-111b-build46.rar
         cd /pvpgn/d2gs/
@@ -126,7 +109,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
         
         #case 4
-        "4") wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
+        "4") cd /pvpgn/
+        wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
         unrar e -o+ D2GS-112a-build01.rar d2gs/
         rm D2GS-112a-build01.rar
         cd /pvpgn/d2gs/
@@ -134,7 +118,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
         
         #case 5
-        "5") wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
+        "5") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
         unrar e -o+ D2GS-113-build02.rar d2gs/
         rm D2GS-113-build02.rar
         cd /pvpgn/d2gs/
@@ -142,7 +127,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
         
         #case 6
-        "6") wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
+        "6") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
         unrar e -o+ D2GS-113c-build03.rar d2gs/
         rm D2GS-113c-build03.rar
         cd /pvpgn/d2gs/
@@ -150,9 +136,10 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;;
         
         #case 7
-        "7") wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
+        "7") cd /pvpgn/
+        wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
         unrar e -o+ D2GS-113d-build02_mxcen.rar d2gs/
-        rm D2GS-113d-build02.rar
+        rm D2GS-113d-build02_mxcen.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
         ;; 
@@ -161,40 +148,37 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Setting up wine"
     dpkg --add-architecture i386
-    apt-get install -y mlibx11-dev
-    apt-get install -y lib32z1
-    apt-get install -y flex
-    apt-get install -y bison
-    apt-get install -y checkinstall
-    apt-get install -y gcc-multilib
-    apt-get install -y g++-multilib
+    wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+    sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
+    apt install --install-recommends winehq-stable
+    #apt-get install -y mlibx11-dev
+    #apt-get install -y lib32z1
+    #apt-get install -y flex
+    #apt-get install -y bison
+    #apt-get install -y checkinstall
+    #apt-get install -y gcc-multilib
+    #apt-get install -y g++-multilib
 
-    mkdir /pvpgn/wine/
-    cd /pvpgn/wine/
-    wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
-    tar xf wine-5.2.tar.xz
-    cd /pvpgn/wine/wine-5.2/server
-    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
-    cd /pvpgn/wine/wine-5.2/
-    ./configure --without-x
-    make -j4
-    checkinstall -D make install
-    apt-get install wine_5.2-1_i386.deb
+    #mkdir /pvpgn/wine/
+    #cd /pvpgn/wine/
+    #wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
+    #tar xf wine-5.2.tar.xz
+    #cd /pvpgn/wine/wine-5.2/server
+    #wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
+    #cd /pvpgn/wine/wine-5.2/
+    #./configure --without-x
+    #make -j4
+    #checkinstall -D make install
+    #apt-get install wine_5.2-1_i386.deb
     winecfg
 
     cd /pvpgn/d2gs/
 
-    echo
     read -r -p "Bnetd ip: " bnetdip
-    echo
     read -r -p "Realm name: " realmname
-    echo
     read -r -p "D2CS ip: " d2csip
-    echo
     read -r -p "D2DBS ip: " d2dbsip
-    echo
     read -r -p "D2GS ip: " d2gsip
-    echo
     read -r -p "D2CS password: " d2cspw
 
     #Create our Reg file
@@ -237,13 +221,15 @@ if  [ "$d2gsSelector" = "yes" ]; then
 mv /pvpgn/d2gs ~/.wine/drive_c/
 wine regedit "c:\d2gs\d2gs_install.reg"
 wine "C:\d2gs\D2GSSVC.exe" -i
-wine net stop D2GS
-rm D2SVC.LOG
 
 sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
 sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
 sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
 sed -i '$ a "s/<bnetd-IP>/"${bnetdip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
 sed -i '$ a "s/0.0.0.0/"${d2dbsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
-sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+
+/usr/local/pvpgn/sbin/bnetd
+/usr/local/pvpgn/sbin/d2dbs
+/usr/local/pvpgn/sbin/d2cs
 fi
