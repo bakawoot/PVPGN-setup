@@ -183,7 +183,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd wine-5.2/server
     wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
     cd ..
-    ./configure --without-x --without-freetype --with-png
+    ./configure --without-x --without-freetype --without-opengl --with-png
     make -j4
     apt-get install -y checkinstall
     checkinstall -D make install
