@@ -193,8 +193,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
     cd d2gs
 
     #Create our Reg file
-    echo "REGEDIT 4
-    
+    echo "Windows Registry Editor Version 5.00
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\D2Server\D2GS]
 @=\"Diablo II Close Game Server\"
 \"AutoUpdate\"=dword:00000000
@@ -216,6 +216,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"IdleSleep\"=dword:00000001
 \"BusySleep\"=dword:00000001
 \"CharPendingTimeout\"=dword:00000258
+\"DebugNetPacket\"=dword:00000000
 \"DebugEventCallback\"=dword:00000000
 \"EnableGSLog\"=dword:00000001
 \"EnableGELog\"=dword:00000001
