@@ -158,6 +158,11 @@ if  [ "$d2gsSelector" = "yes" ]; then
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
         ;; 
     esac
+
+    echo
+    read -r -p "D2CS ip: " d2csip
+    echo
+    read -r -p "D2DBS ip: " d2dbsip
     
     echo
     echo "-- Setting up wine"
@@ -196,9 +201,9 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"AutoUpdateUrl\"=\"http://your.website.url/for.update\"
 \"AutoUpdateVer\"=dword:00000000
 \"AutoUpdateTimeout\"=dword:00007530
-\"D2CSIP\"=\"192.168.0.15\"
+\"D2CSIP\"=\""${d2csip}"\"
 \"D2CSPort\"=dword:000017e1
-\"D2DBSIP\"=\"192.168.0.15\"
+\"D2DBSIP\"=\""${d2dbsip}"\"
 \"D2DBSPort\"=dword:000017e2
 \"MaxGames\"=dword:00000400
 \"MaxGameLife\"=dword:00003840
