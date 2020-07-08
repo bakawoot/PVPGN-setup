@@ -8,42 +8,12 @@ echo "-- Installing packages --"
 apt-get install -y cmake
 apt-get install -y build-essential
 apt-get install -y zlib1g-dev
+apt-get install -y libmysql++-dev
+apt-get install -y liblua5.1-0-dev 
 
 echo
 echo "-- Select a Branch"
 read -r -p "'master' or 'develop': " branch
-
-echo
-echo "-- Do you want LUA support?"
-read -r -p "'yes' or 'no': " luaSelector
-
-case "$luaSelector" in
-    #case 1
-    "yes") lua='true'
-    echo
-    echo "- LibLua5.1-0-DEV"
-    apt-get install -y liblua5.1-0-dev 
-    ;;
-
-    #case 2
-    "no") lua='false' ;;
-esac
-
-echo
-echo "-- Do you want MYSQL support?"
-read -r -p "'yes' or 'no': " mysqlSelector
-
-case "$mysqlSelector" in
-    #case 1
-    "yes") mysql='true'
-    echo
-    echo "- LibMYSQL++-DEV"
-    apt-get install -y libmysql++-dev
-    ;;
-
-    #case 2
-    "no") mysql='false' ;;
-esac
 
 echo
 echo "-- Cloning the latest PVPGN files --"
@@ -52,7 +22,7 @@ git clone --depth=50 --branch="${branch}" https://github.com/pvpgn/pvpgn-server.
 mkdir /pvpgn/pvpgn-source/build
 
 cd /pvpgn/pvpgn-source/build
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL="${mysql}" -D WITH_LUA="${lua}" ../
+cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL=true -D WITH_LUA=true ../
 
 echo
 echo "-- Make & Install --"
@@ -151,25 +121,25 @@ if  [ "$d2gsSelector" = "yes" ]; then
     wget http://cdn.pvpgn.pro/diablo2/d2sfx.mpq
     wget http://cdn.pvpgn.pro/diablo2/ijl11.dll
     
-    #echo
-    #echo "-- Setting up wine"
-    #dpkg --add-architecture i386
-    #apt-get install -y lib32z1
-    #apt-get install -y flex
-    #apt-get install -y bison
-    #apt-get install -y checkinstall
+    echo
+    echo "-- Setting up wine"
+    dpkg --add-architecture i386
+    apt-get install -y lib32z1
+    apt-get install -y flex
+    apt-get install -y bison
+    apt-get install -y checkinstall
 
-    #mkdir /pvpgn/wine/
-    #cd /pvpgn/wine/
-    #wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
-    #tar xf wine-5.2.tar.xz
-    #cd /pvpgn/wine/wine-5.2/server
-    #wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
-    #cd /pvpgn/wine/wine-5.2/
-    #./configure --without-x
-    #make -j4
-    #checkinstall -D make install
-    #winecfg
+    mkdir /pvpgn/wine/
+    cd /pvpgn/wine/
+    wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
+    tar xf wine-5.2.tar.xz
+    cd /pvpgn/wine/wine-5.2/server
+    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
+    cd /pvpgn/wine/wine-5.2/
+    ./configure --without-x
+    make -j4
+    checkinstall -D make install
+    winecfg
 
     #read -r -p "Bnetd ip: " bnetdip
     #read -r -p "Realm name: " realmname
