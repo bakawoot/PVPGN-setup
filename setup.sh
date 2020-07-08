@@ -144,6 +144,12 @@ if  [ "$d2gsSelector" = "yes" ]; then
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
         ;; 
     esac
+
+        wget http://cdn.pvpgn.pro/diablo2/d2data.mpq
+        wget http://cdn.pvpgn.pro/diablo2/d2exp.mpq
+        wget http://cdn.pvpgn.pro/diablo2/d2sfx.mpq
+        wget http://cdn.pvpgn.pro/diablo2/d2speech.mpq
+        wget http://cdn.pvpgn.pro/diablo2/ijl11.dll
     
     echo
     echo "-- Setting up wine"
@@ -171,8 +177,6 @@ if  [ "$d2gsSelector" = "yes" ]; then
     #checkinstall -D make install
     #apt-get install wine_5.2-1_i386.deb
     winecfg
-
-    cd /pvpgn/d2gs/
 
     read -r -p "Bnetd ip: " bnetdip
     read -r -p "Realm name: " realmname
@@ -222,14 +226,15 @@ mv /pvpgn/d2gs ~/.wine/drive_c/
 wine regedit "c:\d2gs\d2gs_install.reg"
 wine "C:\d2gs\D2GSSVC.exe" -i
 
-sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
-sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-sed -i '$ a "s/<bnetd-IP>/"${bnetdip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-sed -i '$ a "s/0.0.0.0/"${d2dbsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
-sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+#uselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuseless
+#sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
+#sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+#sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+#sed -i '$ a "s/<bnetd-IP>/"${bnetdip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+#sed -i '$ a "s/0.0.0.0/"${d2dbsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+#sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
 
-/usr/local/pvpgn/sbin/bnetd
-/usr/local/pvpgn/sbin/d2dbs
-/usr/local/pvpgn/sbin/d2cs
+#/usr/local/pvpgn/sbin/bnetd
+#/usr/local/pvpgn/sbin/d2dbs
+#/usr/local/pvpgn/sbin/d2cs
 fi
