@@ -84,7 +84,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 1
         "1") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-109d.zip
-        unrar e -o+ D2GS-109d.zip d2gs/
+        unrar x D2GS-109d.zip d2gs/
         rm D2GS-109d.zip
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.09d/
@@ -93,7 +93,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 2
         "2") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-110-bin-beta6.rar
-        unrar e -o+ D2GS-110-bin-beta6.rar d2gs/
+        unrar x D2GS-110-bin-beta6.rar d2gs/
         rm D2GS-110-bin-beta6.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.10/
@@ -102,7 +102,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 3
         "3") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-111b-build46.rar
-        unrar e -o+ D2GS-111b-build46.rar d2gs/
+        unrar x D2GS-111b-build46.rar d2gs/
         rm D2GS-111b-build46.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.11b/
@@ -111,7 +111,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 4
         "4") cd /pvpgn/
         wget hhttp://cdn.pvpgn.pro/d2gs/D2GS-112a-build01.rar
-        unrar e -o+ D2GS-112a-build01.rar d2gs/
+        unrar x D2GS-112a-build01.rar d2gs/
         rm D2GS-112a-build01.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.12a/
@@ -120,7 +120,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 5
         "5") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-113-build02.rar
-        unrar e -o+ D2GS-113-build02.rar d2gs/
+        unrar x D2GS-113-build02.rar d2gs/
         rm D2GS-113-build02.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
@@ -129,7 +129,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 6
         "6") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-113c-build03.rar
-        unrar e -o+ D2GS-113c-build03.rar d2gs/
+        unrar x D2GS-113c-build03.rar d2gs/
         rm D2GS-113c-build03.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13c/
@@ -138,7 +138,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
         #case 7
         "7") cd /pvpgn/
         wget http://cdn.pvpgn.pro/d2gs/D2GS-113d-build02_mxcen.rar
-        unrar e -o+ D2GS-113d-build02_mxcen.rar d2gs/
+        unrar x D2GS-113d-build02_mxcen.rar d2gs/
         rm D2GS-113d-build02_mxcen.rar
         cd /pvpgn/d2gs/
         wget -r -nH --cut-dirs=2 --no-parent --reject="index.html*" http://cdn.pvpgn.pro/diablo2/1.13d/
