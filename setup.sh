@@ -127,18 +127,17 @@ if  [ "$d2gsSelector" = "yes" ]; then
     apt-get install -y lib32z1
     apt-get install -y flex
     apt-get install -y bison
-    apt-get install -y checkinstall
 
     mkdir /pvpgn/wine/
     cd /pvpgn/wine/
     wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
     tar xf wine-5.2.tar.xz
     cd /pvpgn/wine/wine-5.2/server
-    wget https://git.redvex.de/RedVex2460/d2gs-linux/raw/master/sock.c
+    wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/Sock%20files/5.2/sock.c
     cd /pvpgn/wine/wine-5.2/
-    ./configure --without-x
-    make -j4
-    checkinstall -D make install
+    ./configure
+    make
+    make install
     winecfg
 
     #read -r -p "Bnetd ip: " bnetdip
