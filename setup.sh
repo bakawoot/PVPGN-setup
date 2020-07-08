@@ -145,25 +145,19 @@ if  [ "$d2gsSelector" = "yes" ]; then
         ;; 
     esac
 
-        wget http://cdn.pvpgn.pro/diablo2/d2data.mpq
-        wget http://cdn.pvpgn.pro/diablo2/d2exp.mpq
-        wget http://cdn.pvpgn.pro/diablo2/d2sfx.mpq
-        wget http://cdn.pvpgn.pro/diablo2/d2speech.mpq
-        wget http://cdn.pvpgn.pro/diablo2/ijl11.dll
+    wget http://cdn.pvpgn.pro/diablo2/d2speech.mpq
+    wget http://cdn.pvpgn.pro/diablo2/d2data.mpq
+    wget http://cdn.pvpgn.pro/diablo2/d2exp.mpq
+    wget http://cdn.pvpgn.pro/diablo2/d2sfx.mpq
+    wget http://cdn.pvpgn.pro/diablo2/ijl11.dll
     
-    echo
-    echo "-- Setting up wine"
-    dpkg --add-architecture i386
-    wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
-    sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
-    apt install --install-recommends winehq-stable
-    #apt-get install -y mlibx11-dev
+    #echo
+    #echo "-- Setting up wine"
+    #dpkg --add-architecture i386
     #apt-get install -y lib32z1
     #apt-get install -y flex
     #apt-get install -y bison
     #apt-get install -y checkinstall
-    #apt-get install -y gcc-multilib
-    #apt-get install -y g++-multilib
 
     #mkdir /pvpgn/wine/
     #cd /pvpgn/wine/
@@ -175,14 +169,13 @@ if  [ "$d2gsSelector" = "yes" ]; then
     #./configure --without-x
     #make -j4
     #checkinstall -D make install
-    #apt-get install wine_5.2-1_i386.deb
-    winecfg
+    #winecfg
 
-    read -r -p "Bnetd ip: " bnetdip
-    read -r -p "Realm name: " realmname
+    #read -r -p "Bnetd ip: " bnetdip
+    #read -r -p "Realm name: " realmname
     read -r -p "D2CS ip: " d2csip
     read -r -p "D2DBS ip: " d2dbsip
-    read -r -p "D2GS ip: " d2gsip
+    #read -r -p "D2GS ip: " d2gsip
     read -r -p "D2CS password: " d2cspw
 
     #Create our Reg file
@@ -222,11 +215,11 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"ServerConfFile\"=\"D2Server.ini\"
 \"MOTD\"=\"Hello world!\"" >> d2gs_install.reg
 
-mv /pvpgn/d2gs ~/.wine/drive_c/
-wine regedit "c:\d2gs\d2gs_install.reg"
-wine "C:\d2gs\D2GSSVC.exe" -i
+#mv /pvpgn/d2gs ~/.wine/drive_c/
+#wine regedit "c:\d2gs\d2gs_install.reg"
+#wine "C:\d2gs\D2GSSVC.exe" -i
+#wine net stop d2gs
 
-#uselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuselessuseless
 #sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
 #sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
 #sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
