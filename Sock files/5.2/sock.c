@@ -363,8 +363,9 @@ static void sock_dispatch_events( struct sock *sock, int prevstate, int event, i
         sock->errors[FD_READ_BIT] = 0;
     }
 
-    if (event & POLLOUT)
+    if ((event & POLLOUT) && (sock->state & FD_WRITE))
     {
+		sock->state &= ~FD_WRITE;
         sock->pmask |= FD_WRITE;
         sock->hmask |= FD_WRITE;
         sock->errors[FD_WRITE_BIT] = 0;
