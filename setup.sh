@@ -133,6 +133,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     wget https://dl.winehq.org/wine/source/5.x/wine-5.2.tar.xz
     tar xf wine-5.2.tar.xz
     cd /pvpgn/wine/wine-5.2/server
+    rm sock.c
     wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/Sock%20files/5.2/sock.c
     cd /pvpgn/wine/wine-5.2/
     ./configure
