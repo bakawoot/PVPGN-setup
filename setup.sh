@@ -5,11 +5,7 @@ echo "== https://github.com/bakawoot/PVPGN-setup =="
 echo
 
 echo "-- Installing packages --"
-apt-get install -y cmake
-apt-get install -y build-essential
-apt-get install -y zlib1g-dev
-apt-get install -y libmysql++-dev
-apt-get install -y liblua5.1-0-dev 
+apt-get install -y cmake build-essential zlib1g-dev libmysql++-dev liblua5.1-0-dev 
 
 echo
 echo "-- Select a Branch"
@@ -124,9 +120,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     echo
     echo "-- Setting up wine"
     dpkg --add-architecture i386
-    apt-get install -y lib32z1
-    apt-get install -y flex
-    apt-get install -y bison
+    apt-get install -y lib32z1 flex bison xserver-xorg-dev:i386 libx11-dev:i386 apt-get install libxcursor1:i386 libfreetype6-dev:i386 zlib1g:i386 mesa-vulkan-drivers:i386 libzstd1:i386 acl gcc-10-base:i386 libasound2-plugins libasyncns0 libatomic1:i386 libblkid1:i386 libbsd0:i386 libbz2-1.0:i386 libc6:i386 libcom-err2:i386 libcrypt1:i386  libdb5.3:i386 libdrm-amdgpu1:i386 libdrm-intel1:i386 libdrm-nouveau2:i386 libdrm2:i386 libedit2:i386 libelf1:i386 libexpat1:i386 libffi7:i386 libflac8 libfreetype6:i386 libgcc-s1:i386 libgcrypt20:i386 libgl1:i386 libgl1-mesa-dri:i386 libglapi-mesa:i386 libglvnd0:i386 libglx-mesa0:i386 libglx0:i386 libgpg-error-l10n libgpg-error0:i386 libgpm2:i386 libidn2-0:i386 libjack-jackd2-0 libllvm10:i386 liblz4-1:i386 liblzma5:i386 libmount1:i386 libncurses6:i386 libpciaccess0:i386 libpcre2-8-0:i386 libpcre3:i386 libpixman-1-0:i386 libpng16-16:i386 libpulse0 libsamplerate0 libselinux1:i386 libsensors5:i386 libsndfile1 libstdc++6:i386 libsystemd0:i386 libtinfo6:i386 libudev1:i386 libunistring2:i386 libuuid1:i386 libva2 libvorbisenc2 libvulkan1:i386 libwayland-client0:i386 libx11-6:i386 libx11-xcb1:i386 libxau6:i386 libxcb-dri2-0:i386 libxcb-dri3-0:i386 libxcb-glx0:i386 libxcb-present0:i386 libxcb-randr0:i386 libxcb-sync1:i386 libxcb1:i386 libxdamage1:i386 libxdmcp6:i386 libxext6:i386 libxfixes3:i386 libxshmfence1:i386  libxxf86vm1:i386
 
     mkdir /pvpgn/wine/
     cd /pvpgn/wine/
@@ -147,6 +141,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
     read -r -p "D2DBS ip: " d2dbsip
     #read -r -p "D2GS ip: " d2gsip
     read -r -p "D2CS password: " d2cspw
+
+    cd /pvpgn/d2gs/
 
     #Create our Reg file
     echo "Windows Registry Editor Version 5.00
@@ -185,10 +181,10 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"ServerConfFile\"=\"D2Server.ini\"
 \"MOTD\"=\"Hello world!\"" >> d2gs_install.reg
 
-#mv /pvpgn/d2gs ~/.wine/drive_c/
-#wine regedit "c:\d2gs\d2gs_install.reg"
-#wine "C:\d2gs\D2GSSVC.exe" -i
-#wine net stop d2gs
+mv /pvpgn/d2gs ~/.wine/drive_c/
+wine regedit "c:\d2gs\d2gs_install.reg"
+wine "C:\d2gs\D2GSSVC.exe" -i
+wine net stop d2gs
 
 #sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
 #sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
