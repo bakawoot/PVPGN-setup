@@ -136,9 +136,9 @@ if  [ "$d2gsSelector" = "yes" ]; then
     make install
     winecfg
 
-    read -r -p "D2CS ip: " d2csip
-    read -r -p "D2DBS ip: " d2dbsip
-    read -r -p "D2CS password: " d2cspw
+    read -r -p "D2CS ip: " d2cs-ip
+    read -r -p "D2DBS ip: " d2dbs-ip
+    read -r -p "D2CS password: " d2cs-pw
 
     cd /pvpgn/d2gs/
 
@@ -151,16 +151,16 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"AutoUpdateUrl\"=\"http://your.website.url/for.update\"
 \"AutoUpdateVer\"=dword:00000000
 \"AutoUpdateTimeout\"=dword:00007530
-\"D2CSIP\"=\""${d2csip}"\"
+\"D2CSIP\"=\""${d2cs-ip}"\"
 \"D2CSPort\"=dword:000017e1
-\"D2DBSIP\"=\""${d2dbsip}"\"
+\"D2DBSIP\"=\""${d2dbs-ip}"\"
 \"D2DBSPort\"=dword:000017e2
 \"MaxGames\"=dword:00000400
 \"MaxGameLife\"=dword:00003840
 \"AdminPassword\"=\"9e75a42100e1b9e0b5d3873045084fae699adcb0\"
 \"AdminPort\"=dword:000022b8
 \"AdminTimeout\"=dword:00000e10
-\"D2CSSecrect\"=\""${d2cspw}"\"
+\"D2CSSecrect\"=\""${d2cs-pw}"\"
 \"EnableNTMode\"=dword:00000000
 \"EnablePreCacheMode\"=dword:00000001
 \"IdleSleep\"=dword:00000001
