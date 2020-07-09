@@ -178,6 +178,11 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"ServerConfFile\"=\"D2Server.ini\"
 \"MOTD\"=\"Hello world!\"" >> d2gs_install.reg
 
+#Setting up firewall rules
+ufw allow 6112
+ufw allow 6113/tcp
+ufw allow 4000/tcp
+
 mv /pvpgn/d2gs ~/.wine/drive_c/
 wine regedit "c:\d2gs\d2gs_install.reg"
 wine "C:\d2gs\D2GSSVC.exe" -i
