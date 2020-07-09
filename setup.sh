@@ -135,11 +135,8 @@ if  [ "$d2gsSelector" = "yes" ]; then
     make install
     winecfg
 
-    #read -r -p "Bnetd ip: " bnetdip
-    #read -r -p "Realm name: " realmname
     read -r -p "D2CS ip: " d2csip
     read -r -p "D2DBS ip: " d2dbsip
-    #read -r -p "D2GS ip: " d2gsip
     read -r -p "D2CS password: " d2cspw
 
     cd /pvpgn/d2gs/
@@ -185,15 +182,4 @@ mv /pvpgn/d2gs ~/.wine/drive_c/
 wine regedit "c:\d2gs\d2gs_install.reg"
 wine "C:\d2gs\D2GSSVC.exe" -i
 wine net stop d2gs
-
-#sed -i '$ a "D2CS"			"PvPGN Closed Realm"		"${d2csip}"' /usr/local/pvpgn/etc/pvpgn/realm.conf
-#sed -i '$ a "s/0.0.0.0/"${d2csip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-#sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-#sed -i '$ a "s/<bnetd-IP>/"${bnetdip}"/' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-#sed -i '$ a "s/0.0.0.0/"${d2dbsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
-#sed -i '$ a "s/<d2gs-IP>,<another-d2gs-IP>/"${d2gsip}"/' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
-
-#/usr/local/pvpgn/sbin/bnetd
-#/usr/local/pvpgn/sbin/d2dbs
-#/usr/local/pvpgn/sbin/d2cs
 fi
