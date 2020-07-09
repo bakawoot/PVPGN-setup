@@ -25,6 +25,16 @@ echo "-- Make & Install --"
 make && make install
 
 echo
+echo "-- Should we setup the firewall rules for PvPGN? --"
+read -r -p "'yes' or 'no': " fwrulespvpgn
+
+if  [ "$fwrulespvpgn" = "yes" ]; then
+
+    #Setting up firewall rule
+    ufw allow 6112      #Bnetd
+fi
+
+echo
 echo "-- Do you want D2GS?"
 read -r -p "'yes' or 'no': " d2gsSelector
 
@@ -179,13 +189,20 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"ServerConfFile\"=\"D2Server.ini\"
 \"MOTD\"=\"Hello world!\"" >> d2gs_install.reg
 
-#Setting up firewall rules
-ufw allow 6112
-ufw allow 6113/tcp
-ufw allow 4000/tcp
+    mv /pvpgn/d2gs ~/.wine/drive_c/
+    wine regedit "c:\d2gs\d2gs_install.reg"
 
-mv /pvpgn/d2gs ~/.wine/drive_c/
-wine regedit "c:\d2gs\d2gs_install.reg"
-wine "C:\d2gs\D2GSSVC.exe" -i
-wine net stop d2gs
+    echo
+    echo "-- Should we setup the firewall rules for D2GS? --"
+    read -r -p "'yes' or 'no': " fwrulesd2gs
+
+    if  [ "$fwrulesd2gs" = "yes" ]; then
+
+        #Setting up firewall rules
+        ufw allow 6113/tcp  #D2CS
+        ufw allow 4000/tcp  #D2GS
+    fi
+
+    wine "C:\d2gs\D2GSSVC.exe" -i
+    wine net stop d2gs
 fi
