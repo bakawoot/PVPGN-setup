@@ -127,8 +127,7 @@ if  [ "$d2gsSelector" = "yes" ]; then
     wget http://cdn.pvpgn.pro/diablo2/d2sfx.mpq
     wget http://cdn.pvpgn.pro/diablo2/ijl11.dll
     
-    echo
-    echo "-- Setting up wine"
+    #setting up wine
     dpkg --add-architecture i386
     wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
     sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' 
@@ -147,11 +146,54 @@ if  [ "$d2gsSelector" = "yes" ]; then
     make install
     winecfg
 
-    read -r -p "D2CS ip: " d2cs-ip
-    read -r -p "D2DBS ip: " d2dbs-ip
-    read -r -p "D2CS password: " d2cs-pw
+    mv /pvpgn/d2gs ~/.wine/drive_c/
 
-    cd /pvpgn/d2gs/
+    echo
+    echo "-- Should we setup the firewall rules for D2GS? --"
+    read -r -p "'yes' or 'no': " fwrulesd2gs
+
+    if  [ "$fwrulesd2gs" = "yes" ]; then
+
+        #Setting up firewall rules
+        ufw allow 6113/tcp  #D2CS
+        ufw allow 4000/tcp  #D2GS
+    fi
+fi
+
+#Delete PvPGN(+/wine) source folder
+rm -r /pvpgn
+
+echo
+echo "-- Do you want to set up PvPGN now? --"
+read -r -p "'yes' or 'no': " setuppvpgn
+
+if  [ "$setuppvpgn" = "yes" ]; then
+
+    read -r -p "Realm name: " realmname
+    read -r -p "External IP: " externip
+    read -r -p "Bnetd IP: " bnetdip
+    read -r -p "D2GS IP: " d2gsip
+    read -r -p "D2DBS IP: " d2dbsip
+    read -r -p "D2CS IP: " d2csip
+    read -r -p "D2CS password: " d2cspw
+
+    #realm.conf
+    sed -i 's/<realmname>/$realmname/g' /usr/local/pvpgn/etc/pvpgn/realm.conf
+    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/realm.conf
+    #d2cs.conf
+    sed -i 's/<realmname>/$realmname/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i 's/<bnetdip>/$bnetdip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i 's/<d2cspw>/$d2cspw/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    #d2dbs.conf
+    sed -i 's/<d2dbsip>/$d2dbsip/g' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+    #address_translation.conf
+    sed -i 's/<bnetdip>/$bnetdip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i 's/<externalip>/$externip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
 
     #Create our Reg file
     echo "Windows Registry Editor Version 5.00
@@ -162,16 +204,16 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"AutoUpdateUrl\"=\"http://your.website.url/for.update\"
 \"AutoUpdateVer\"=dword:00000000
 \"AutoUpdateTimeout\"=dword:00007530
-\"D2CSIP\"=\""${d2cs-ip}"\"
+\"D2CSIP\"=\""${d2csip}"\"
 \"D2CSPort\"=dword:000017e1
-\"D2DBSIP\"=\""${d2dbs-ip}"\"
+\"D2DBSIP\"=\""${d2dbsip}"\"
 \"D2DBSPort\"=dword:000017e2
 \"MaxGames\"=dword:00000400
 \"MaxGameLife\"=dword:00003840
 \"AdminPassword\"=\"9e75a42100e1b9e0b5d3873045084fae699adcb0\"
 \"AdminPort\"=dword:000022b8
 \"AdminTimeout\"=dword:00000e10
-\"D2CSSecrect\"=\""${d2cs-pw}"\"
+\"D2CSSecrect\"=\""${d2cspw}"\"
 \"EnableNTMode\"=dword:00000000
 \"EnablePreCacheMode\"=dword:00000001
 \"IdleSleep\"=dword:00000001
@@ -188,23 +230,24 @@ if  [ "$d2gsSelector" = "yes" ]; then
 \"MaxPreferUsers\"=dword:000000b4
 \"MaxPacketPerSecond\"=dword:000004b0
 \"ServerConfFile\"=\"D2Server.ini\"
-\"MOTD\"=\"Hello world!\"" >> d2gs_install.reg
-
-    mv /pvpgn/d2gs ~/.wine/drive_c/
+\"MOTD\"=\"Hello world!\"" >> ~/.wine/drive_c/d2gs/d2gs_install.reg
+    
     wine regedit "c:\d2gs\d2gs_install.reg"
-
-    echo
-    echo "-- Should we setup the firewall rules for D2GS? --"
-    read -r -p "'yes' or 'no': " fwrulesd2gs
-
-    if  [ "$fwrulesd2gs" = "yes" ]; then
-
-        #Setting up firewall rules
-        ufw allow 6113/tcp  #D2CS
-        ufw allow 4000/tcp  #D2GS
-    fi
-
     wine "C:\d2gs\D2GSSVC.exe" -i
     wine net stop d2gs
 fi
-rm -r /pvpgn
+
+/usr/local/pvpgn/sbin/bnetd
+sleep 5 #we have to wait... 5 secs for bnetd to start.
+/usr/local/pvpgn/sbin/d2cs
+sleep 5 #we have to wait... 5 secs for d2cs to start.
+/usr/local/pvpgn/sbin/d2dbs
+
+if  [ "$d2gsSelector" = "yes" ]; then
+    sleep 5 #we have to wait... 5 secs for d2dbs to start.
+    wine net start d2gs
+fi
+
+echo
+echo "Done."
+echo
