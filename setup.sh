@@ -207,3 +207,4 @@ if  [ "$d2gsSelector" = "yes" ]; then
     wine "C:\d2gs\D2GSSVC.exe" -i
     wine net stop d2gs
 fi
+rm -r /pvpgn
