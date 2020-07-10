@@ -178,22 +178,22 @@ if  [ "$setuppvpgn" = "yes" ]; then
     read -r -p "D2CS password: " d2cspw
 
     #realm.conf
-    sed -i 's/<realmname>/$realmname/g' /usr/local/pvpgn/etc/pvpgn/realm.conf
-    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/realm.conf
+    sed -i "s/<realmname>/$realmname/g" /usr/local/pvpgn/etc/pvpgn/realm.conf
+    sed -i "s/<d2csip>/$d2csip/g" /usr/local/pvpgn/etc/pvpgn/realm.conf
     #d2cs.conf
-    sed -i 's/<realmname>/$realmname/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-    sed -i 's/<bnetdip>/$bnetdip/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
-    sed -i 's/<d2cspw>/$d2cspw/g' /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i "s/<realmname>/$realmname/g" /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i "s/<d2csip>/$d2csip/g" /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i "s/<d2gsip>/$d2gsip/g" /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i "s/<bnetdip>/$bnetdip/g" /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    sed -i "s/<d2cspw>/$d2cspw/g" /usr/local/pvpgn/etc/pvpgn/d2cs.conf
     #d2dbs.conf
-    sed -i 's/<d2dbsip>/$d2dbsip/g' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
-    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+    sed -i "s/<d2dbsip>/$d2dbsip/g" /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+    sed -i "s/<d2gsip>/$d2gsip/g" /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
     #address_translation.conf
-    sed -i 's/<bnetdip>/$bnetdip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
-    sed -i 's/<d2csip>/$d2csip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
-    sed -i 's/<d2gsip>/$d2gsip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
-    sed -i 's/<externalip>/$externip/g' /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i "s/<bnetdip>/$bnetdip/g" /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i "s/<d2csip>/$d2csip/g" /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i "s/<d2gsip>/$d2gsip/g" /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+    sed -i "s/<externalip>/$externip/g" /usr/local/pvpgn/etc/pvpgn/address_translation.conf
 
     #Create our Reg file
     echo "Windows Registry Editor Version 5.00
