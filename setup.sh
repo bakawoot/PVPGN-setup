@@ -169,6 +169,18 @@ read -r -p "'yes' or 'no': " setuppvpgn
 
 if  [ "$setuppvpgn" = "yes" ]; then
 
+    rm /usr/local/pvpgn/etc/pvpgn/realm.conf
+    rm /usr/local/pvpgn/etc/pvpgn/d2cs.conf
+    rm /usr/local/pvpgn/etc/pvpgn/d2dbs.conf
+    rm /usr/local/pvpgn/etc/pvpgn/address_translation.conf
+
+    cd /usr/local/pvpgn/etc/pvpgn/
+
+    wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/conf/d2cs.conf
+    wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/conf/d2dbs.conf
+    wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/conf/realm.conf
+    wget https://raw.githubusercontent.com/bakawoot/PVPGN-setup/master/conf/address_translation.conf
+
     read -r -p "Realm name: " realmname
     read -r -p "External IP: " externip
     read -r -p "Bnetd IP: " bnetdip
