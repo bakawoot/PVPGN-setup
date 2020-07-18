@@ -160,9 +160,6 @@ if  [ "$d2gsSelector" = "yes" ]; then
     fi
 fi
 
-#Delete PvPGN(+/wine) source folder
-rm -r /pvpgn
-
 echo
 echo "-- Do you want to set up PvPGN now? --"
 read -r -p "'yes' or 'no': " setuppvpgn
@@ -249,6 +246,17 @@ if  [ "$setuppvpgn" = "yes" ]; then
     wine net stop d2gs
 fi
 
+echo
+echo "-- Do you want PvPGN API?"
+read -r -p "'yes' or 'no': " pvpgnapiselector
+
+if  [ "$pvpgnapiselector" = "yes" ]; then
+    wget https://github.com/pvpgn/api.pvpgn.pro/releases/download/v0.3/api.pvpgn.pro_0.3_linux-x64.zip -P /pvpgn/
+    unzip /pvpgn/api.pvpgn.pro_0.3_linux-x64.zip -d /usr/local/pvpgnapi/
+    chmod +x /usr/local/pvpgnapi/WebAPI
+    /usr/local/pvpgnapi/WebAPI
+fi
+
 /usr/local/pvpgn/sbin/bnetd
 sleep 5 #we have to wait... 5 secs for bnetd to start.
 /usr/local/pvpgn/sbin/d2cs
@@ -259,6 +267,9 @@ if  [ "$d2gsSelector" = "yes" ]; then
     sleep 5 #we have to wait... 5 secs for d2dbs to start.
     wine net start d2gs
 fi
+
+#Delete PvPGN(+/wine) source folder
+rm -r /pvpgn
 
 echo
 echo "Done."
